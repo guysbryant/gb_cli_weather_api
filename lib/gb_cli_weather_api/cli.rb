@@ -18,7 +18,11 @@ class GbCliWeatherApi::CLI
             puts "I can also work with Greenville, SC."
             menu
         end
-        binding.pry
+        display_weather(weather)
+    end
+
+    def display_weather(weather)
+        puts "The weather today is #{weather.weather_description}\nWith a high of #{weather.temp_max.ceil}F and low of #{weather.temp_min.floor}F\nThe current temp is #{weather.temp.round}F and it feels like #{weather.temp_feel.round}F in #{weather.location_name}\nToday's sunrise is at #{weather.sunrise} and sunset is at #{weather.sunset}\nHave a great day!"
     end
 
     def get_weather_by_city(city)
