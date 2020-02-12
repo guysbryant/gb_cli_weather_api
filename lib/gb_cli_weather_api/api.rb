@@ -6,7 +6,7 @@ class GbCliWeatherApi::API
         get("?zip=#{29611},us&appid=#{GbCliWeatherApi::APIKEY.api_key}")["cod"]
     end
     def self.zip_code_weather(zipcode = 29611)
-        response = get("?zip=#{zipcode},us&appid=#{GbCliWeatherApi::APIKEY.api_key}")
+        response = get("?zip=#{zipcode},us&appid=#{GbCliWeatherApi::APIKEY.api_key}&units=imperial")
         GbCliWeatherApi::Weather.new(
             {
                 :weather_main => response["weather"][0]["main"],
