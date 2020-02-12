@@ -4,5 +4,6 @@ class GbCliWeatherApi::API
 
     def self.zip_code_weather(zipcode = 29611)
         get("?zip=#{zipcode},us&appid=#{GbCliWeatherApi::APIKEY.api_key}")
+        GbCliWeatherApi::Weather.new
     end
 end
