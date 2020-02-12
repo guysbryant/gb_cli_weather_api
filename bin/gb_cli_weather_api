@@ -2,5 +2,4 @@
 
 require "bundler/setup"
 require "./lib/environment"
-require "api_key"
-GbCliWeatherApi::CLI.new.start
+GbCliWeatherApi::CLI.new
