@@ -9,6 +9,6 @@ class GbCliWeatherApi::CLI
         puts "Let's show your weather.\n Enter your zipcode: "
         zipcode = gets.strip.downcase
         menu if zipcode.length != 5 || zipcode =~ /[a-z]/
-        puts GbCliWeatherApi::API.zip_code_weather(zipcode)
+        weather = GbCliWeatherApi::API.zip_code_weather(zipcode)
     end
 end
