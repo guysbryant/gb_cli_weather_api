@@ -5,8 +5,16 @@ class GbCliWeatherApi::API
     def self.key_check
         get("?zip=#{29611},us&appid=#{GbCliWeatherApi::APIKEY.api_key}")["cod"]
     end
+
+    def self.city_weather(city = "greenvile,sc")
+        make_weather(get("?q=#{city},us&appid=#{GbCliWeatherApi::APIKEY.api_key}&units=imperial"))
+    end
+
     def self.zip_code_weather(zipcode = 29611)
-        response = get("?zip=#{zipcode},us&appid=#{GbCliWeatherApi::APIKEY.api_key}&units=imperial")
+        make_weather(get("?zip=#{zipcode},us&appid=#{GbCliWeatherApi::APIKEY.api_key}&units=imperial"))
+    end
+
+    def self.make_weather(response)
         GbCliWeatherApi::Weather.new(
             {
                 :weather_main => response["weather"][0]["main"],
