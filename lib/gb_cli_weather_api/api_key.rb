@@ -32,15 +32,25 @@ class GbCliWeatherApi::APIKEY
         end
     end
 
-    private
+    def self.valid_key?
+        GbCliWeatherApi::API.zip_code_weather["cod"] == 200 ? true : self.key_bad_response
+    end
+
+    def self.key_bad_response
+        puts "Your api key doesn't appear to be working or weather underground isn't responding.\n
+        Please check your key or wait for weather underground and try again later.\nDo you want to change your api key? "
+        change_key = gets.strip
+        self.update_api_key if change_key.downcase.include?('y')
+    end
 
     def self.set_api_key
         self.create_api_key if !self.api_key_exists?
         @@api_key = File.open(".api_key").read
+        self.valid_key?
     end
 
     def self.create_api_key
-        puts "Enter your api key for weatehr underground:"
+        puts "Enter your api key for weather underground:"
         key = gets.strip
         File.open(".api_key", "w"){|f| f.write(key)}
     end
@@ -48,7 +58,6 @@ class GbCliWeatherApi::APIKEY
     def self.api_key_exists?
         !!File.file?(".api_key")
     end
-
 
     def self.delete_api_key
         File.delete(".api_key")
