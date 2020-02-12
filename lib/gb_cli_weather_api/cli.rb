@@ -21,14 +21,13 @@ class GbCliWeatherApi::CLI
         display_weather(weather)
     end
 
-    def min_fix(min)
-        min < 10 ? "0#{min}" : min
-    end
-    def hour_fix(hour)
-        hour > 12 ? hour - 12 : hour == 0 ? 12 : hour
-    end
-
     def display_weather(weather)
+        def min_fix(min)
+            min < 10 ? "0#{min}" : min
+        end
+        def hour_fix(hour)
+            hour > 12 ? hour - 12 : hour == 0 ? 12 : hour
+        end
         print "The weather today is #{weather.weather_description}\nWith a high of #{weather.temp_max.ceil}F and low of #{weather.temp_min.floor}F\nThe current temp is #{weather.temp.round}F and it feels like #{weather.temp_feel.round}F in #{weather.location_name}\nToday's sunrise is at #{hour_fix(Time.at(weather.sunrise).hour)}:#{min_fix(Time.at(weather.sunrise).min)} and sunset is at #{hour_fix(Time.at(weather.sunset).hour)}:#{min_fix(Time.at(weather.sunset).min)}\nHave a great day!"
     end
 
