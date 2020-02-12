@@ -33,7 +33,7 @@ class GbCliWeatherApi::APIKEY
     end
 
     def self.valid_key?
-        GbCliWeatherApi::API.zip_code_weather["cod"] == 200 ? true : self.key_bad_response
+        GbCliWeatherApi::API.key_check == 200 ? true : self.key_bad_response
     end
 
     def self.key_bad_response
@@ -66,5 +66,4 @@ class GbCliWeatherApi::APIKEY
     def self.api_key
         @@api_key
     end
-
 end
